@@ -33,9 +33,11 @@ pip3 install -r requirements.txt
 
 ##### Windows:
 ```zsh
-python main.py
+python politique.py
+python vols.py
 ```
 ##### macOS/Linux:
 ```zsh
-python3 main.py
+python3 politique.py
+python3 vols.py
 ```

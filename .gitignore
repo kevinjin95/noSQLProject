@@ -4,3 +4,9 @@ env
 test.py
 /generatedJson
 .gitignore
+/files
+.
+..
+.docker
+.env.example
+.git

@@ -26,6 +26,22 @@ def dictToJson(jsonFile, dict):
     json.dump(dict, otfile)
     otfile.close()
 
+def sort_item(item):
+    return int(item[0])
+
+def sort(deps, row):
+    tmp = []
+    for ind in range (len(deps)):
+        tmp.append([deps[ind], row[ind]])
+    for ind in range(1, len(tmp)):
+        j = ind
+        while tmp[j - 1][0] > tmp[j][0] and j > 0:
+            tmp[j - 1], tmp[j] = tmp[j], tmp[j - 1]
+            j -= 1
+    tmp.sort(key=sort_item)
+    deps = [val[0] for val in tmp]
+    row = [val[1] for val in tmp]
+    return deps, row
 
 def checkFloat(val):
     try:

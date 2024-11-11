@@ -11,13 +11,12 @@ def runWithMongo():
     dict = csvToDict(csvFile)
     dictToJson(jsonFile, dict)
     jsonToMongo(jsonFile)
-    # dep, row = retrieveToMongo(rowName)
-    # pandaDf = reUnitToPanda1(dep, row)
-    # pandaDf, label = sklTest(pandaDf)
-    # depsList, valuesList, label = difcentroids(pandaDf)
-    # pandaDf, label = reUnitToPanda2(depsList, valuesList, label)
-    # displayClusters(pandaDf, label, title)
-
+    deps, row = retrieveToMongo(rowName)
+    pandaDf = reUnitToPanda1(deps, row)
+    pandaDf, label = sklTest(pandaDf)
+    depsList, valuesList, label = difcentroids(pandaDf)
+    pandaDf, label = reUnitToPanda2(depsList, valuesList, label)
+    displayClusters(pandaDf, label, title)
 
 def runWithRedis():
     rowName = 'conjnosif1686'
@@ -28,8 +27,9 @@ def runWithRedis():
     dict = csvToDict(csvFile)
     dictToJson(jsonFile, dict)
     jsonToRedis(jsonFile)
-    dep, row = retrieveToRedis(rowName)
-    pandaDf = reUnitToPanda1(dep, row)
+    deps, row = retrieveToRedis(rowName)
+    deps, row = sort(deps, row)
+    pandaDf = reUnitToPanda1(deps, row)
     pandaDf, label = sklTest(pandaDf)
     depsList, valuesList, label = difcentroids(pandaDf)
     pandaDf, label = reUnitToPanda2(depsList, valuesList, label)

@@ -1,4 +1,4 @@
-from politics.connection import connectionToRedis, connectionToMongo
+from politics.connection import connectionToRedis
 import json
 
 b = connectionToRedis()

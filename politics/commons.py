@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import csv
 from sklearn.cluster import KMeans
 import numpy as np
 import json
+import csv
 
 def csvToDict(csvFile):
   myDict = {}
@@ -29,20 +29,6 @@ def dictToJson(jsonFile, dict):
 def sort_item(item):
     return int(item[0])
 
-def sort(deps, row):
-    tmp = []
-    for ind in range (len(deps)):
-        tmp.append([deps[ind], row[ind]])
-    for ind in range(1, len(tmp)):
-        j = ind
-        while tmp[j - 1][0] > tmp[j][0] and j > 0:
-            tmp[j - 1], tmp[j] = tmp[j], tmp[j - 1]
-            j -= 1
-    tmp.sort(key=sort_item)
-    deps = [val[0] for val in tmp]
-    row = [val[1] for val in tmp]
-    return deps, row
-
 def checkFloat(val):
     try:
         float(val)
@@ -50,37 +36,22 @@ def checkFloat(val):
         return False
     return True
 
-def reUnitToPanda1(dep, val):
-    dataset = []
-    i=0
-    while True:
-        if checkFloat(dep[i]):
-            dataset.append([float(dep[i]), float(val[i])])
-        i += 1
-        if i == len(dep):
-            break
-    pandaDf = pd.DataFrame(dataset)
+def sort(deps, row):
+    tmp = []
+    for ind in range (len(deps)):
+        if checkFloat(deps[ind]):
+            tmp.append([float(deps[ind]), float(row[ind])])
+    tmp.sort(key=sort_item)
+    deps = [val[0] for val in tmp]
+    row = [val[1] for val in tmp]
+    pandaDf = pd.DataFrame(tmp)
     return pandaDf
-
-def reUnitToPanda2(dep, val, clus):
-    label = np.array([clus])
-    dataset = []
-    i=0
-    while True:
-        if checkFloat(dep[i]):
-            dataset.append([float(dep[i]), float(val[i]), float(clus[i])])
-        i += 1
-        if i == len(dep):
-            break
-    pandaDf = pd.DataFrame(dataset)
-    return pandaDf, label
 
 def displayData(pandaDf, rowName):
     plt.scatter(pandaDf[0], pandaDf[1])
     plt.grid(False)
     plt.title(rowName)
     plt.show()
-
 
 def sklTest(pandaDf):
     a = pandaDf.values[:]
@@ -93,16 +64,6 @@ def sklTest(pandaDf):
     pandaDf['cluster'] = label
     pandaDf.groupby('cluster').mean()
     return pandaDf, label
-
-def displayClusters(pandaDf, label, title):
-    print(pandaDf)
-    print(type(label))
-    surface = 10 * 10
-    plt.xlabel('départements')
-    plt.ylabel('nombre de contrat de mariage signé')
-    plt.title(title)
-    plt.scatter(pandaDf[0], pandaDf[1], surface, label.astype(np.float64), alpha = 1)
-    plt.show()
 
 def difcentroids(pandaDf):
     depsList = [i for i in pandaDf[0]]
@@ -124,3 +85,26 @@ def difcentroids(pandaDf):
         valuesList.append(centroidsVal[ind])
         clustersList.append(4)
     return depsList, valuesList, clustersList
+
+def reUnit3In1(dep, val, clus):
+    label = np.array([clus])
+    dataset = []
+    i=0
+    while True:
+        if checkFloat(dep[i]):
+            dataset.append([float(dep[i]), float(val[i]), float(clus[i])])
+        i += 1
+        if i == len(dep):
+            break
+    pandaDf = pd.DataFrame(dataset)
+    return pandaDf, label
+
+def displayClusters(pandaDf, label, title):
+    print(pandaDf)
+    print(type(label))
+    surface = 10 * 10
+    plt.xlabel('départements')
+    plt.ylabel('nombre de contrat de mariage signé')
+    plt.title(title)
+    plt.scatter(pandaDf[0], pandaDf[1], surface, label.astype(np.float64), alpha = 1)
+    plt.show()

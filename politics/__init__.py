@@ -9,8 +9,8 @@ def runWithRedis():
     rowName = 'conjnosif1686'
     title = 'nombre de contrat non signé dans les différents départements de france chez les femmes en 1686'
     dict = {}
-    csvFile = "/home/jk1234/Documents/nouvelleBD/newDB/politics/static/csv/diplomesdepartements.csv"
-    jsonFile = "/home/jk1234/Documents/nouvelleBD/newDB/politics/static/json/diplomesdepartements.json"
+    csvFile = "/home/jk1234/Documents/BUT3/nouvelleBD/noSQLProjet/politics/static/csv/diplomesdepartements.csv"
+    jsonFile = "/home/jk1234/Documents/BUT3/nouvelleBD/noSQLProjet/politics/static/json/diplomesdepartements.json"
     dict = csvToDict(csvFile)
     dictToJson(jsonFile, dict)
     with cProfile.Profile() as profile:
@@ -33,8 +33,8 @@ def runWithMongo():
     rowName = 'conjnosif1686'
     title = 'nombre de contrat non signé dans les différents départements de france chez les femmes en 1686'
     dict = {}
-    csvFile = "/home/jk1234/Documents/nouvelleBD/newDB/politics/static/csv/diplomesdepartements.csv"
-    jsonFile = "/home/jk1234/Documents/nouvelleBD/newDB/politics/static/json/diplomesdepartements.json"    
+    csvFile = "/home/jk1234/Documents/BUT3/nouvelleBD/noSQLProjet/politics/static/csv/diplomesdepartements.csv"
+    jsonFile = "/home/jk1234/Documents/BUT3/nouvelleBD/noSQLProjet/politics/static/json/diplomesdepartements.json"    
     dict = csvToDict(csvFile)
     dictToJson(jsonFile, dict)
     with cProfile.Profile() as profile:

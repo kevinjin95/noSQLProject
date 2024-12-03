@@ -17,9 +17,9 @@ def connectionToMongo():
     from pymongo import MongoClient
 
     load_dotenv()
-
+    Pass = getenv("MONGO_SECRET_PASS")
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    CONNECTION_STRING = f"mongodb+srv://kevinjin:{getenv("MONGO_SECRET_PASS")}.mongodb.net/"
+    CONNECTION_STRING = f"mongodb+srv://kevinjin:{Pass}.mongodb.net/"
  
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
     client = MongoClient(CONNECTION_STRING)
